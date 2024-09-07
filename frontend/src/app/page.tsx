@@ -1,5 +1,6 @@
+import LoginPage from "./login/page"
 export default function HomeView():JSX.Element{
   return (
-    <h1>home</h1>
+    <LoginPage/>
   )
 }
