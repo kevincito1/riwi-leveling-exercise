@@ -25,6 +25,8 @@ const LoginPage = () => {
       const data = await response.json();
       alert("Inicio de sesión");
       sessionStorage.setItem("token", data.token); // Almacena el token
+      sessionStorage.setItem("name", data.user.name);
+      sessionStorage.setItem("id", data.user.id);
       const token = sessionStorage.getItem("token");
       if (token) {
         router.push("/home"); // Redirige si el token existe
