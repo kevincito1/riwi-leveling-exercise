@@ -1,15 +1,15 @@
 'use client'
 
-import { useState } from 'react';
-import {useRouter} from 'next/navigation';
+import { useState, FormEvent } from 'react';
+import { useRouter } from 'next/navigation';
 
-const RegisterPage = () => {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const router = useRouter()
+const RegisterPage: React.FC = () => {
+    const [name, setName] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const router = useRouter();
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
         const response = await fetch("http://localhost:3060/api/auth/register", {
             method: "POST",
@@ -19,14 +19,14 @@ const RegisterPage = () => {
             body: JSON.stringify({ name, email, password }),
         });
 
-        if(response.ok){
+        if (response.ok) {
             const data = await response.json();
-            alert("Registro exitoso" + data.message);
-            router.push("/login")
-        }else {
+            alert("Registro exitoso: " + data.message);
+            router.push("/login");
+        } else {
             alert("Error en el registro: ");
         }
-        // Limpiar los campos
+
         setName('');
         setEmail('');
         setPassword('');

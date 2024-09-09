@@ -35,6 +35,62 @@ a {
   text-decoration: none;
 }
 
+/* styles.css */
+body {
+  background-color: #f0f4f8; /* Color de fondo suave */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #333; /* Color del título */
+}
+
+button {
+  background-color: #007bff; 
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 10px 5px; 
+}
+
+button:hover {
+  background-color: #0056b3; 
+}
+
+.card {
+  background-color: white; 
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 15px 0; 
+  padding: 15px;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.02); 
+}
+
+.card h2 {
+  color: #007bff; 
+  margin: 0 0 10px; 
+}
+
+.card p {
+  color: #555; 
+  margin: 0; 
+}
+
+.container {
+  max-width: 800px; 
+  margin: auto; 
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

@@ -1,19 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-const LoginPage = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+
+const LoginPage: React.FC = () => {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const router = useRouter();
 
   
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
-    const response = await fetch("http://localhost:3060/api/auth/login", {
+    const response: Response = await fetch("http://localhost:3060/api/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -24,14 +25,14 @@ const LoginPage = () => {
     if (response.ok) {
       const data = await response.json();
       alert("Inicio de sesión");
-      sessionStorage.setItem("token", data.token); // Almacena el token
+      sessionStorage.setItem("token", data.token); 
       sessionStorage.setItem("name", data.user.name);
       sessionStorage.setItem("id", data.user.id);
       const token = sessionStorage.getItem("token");
       if (token) {
-        router.push("/home"); // Redirige si el token existe
+        router.push("/home"); 
       } else {
-        alert("No estás autenticado."); // Mensaje de error si no hay token
+        alert("No estás autenticado."); 
       }
     } else {
       if (
@@ -39,7 +40,7 @@ const LoginPage = () => {
           "Datos inválidos, revisa que estén correctos o si no estás registrado\n\n ¿Quieres registrarte?"
         )
       ) {
-        window.location.href = "/register"; // Redirige a la página de registro
+        window.location.href = "/register"; 
       }
     }
 

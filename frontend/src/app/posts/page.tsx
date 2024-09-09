@@ -1,20 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 
-const PostsPage = () => {
+const PostsPage: React.FC = () => {
   const router = useRouter();
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
 
-  const id_user = parseInt(sessionStorage.getItem("id") || "0"); // Proporcionar un valor por defecto
-  console.log(typeof(id_user))
+  const id_user: number = parseInt(sessionStorage.getItem("id") || "0"); // Proporcionar un valor por defecto
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
-    console.log("Valores enviados:", { title, description, id_user });
-    const response = await fetch("http://localhost:3060/api/posts", {
+    console.log({ title, description, id_user });
+    const response: Response = await fetch("http://localhost:3060/api/posts", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -24,15 +23,16 @@ const PostsPage = () => {
     if (response.ok) {
       const data = await response.json();
       console.log(data);
-      alert("Post creado Exitosamente")
+      alert("Post creado Exitosamente");
     }
 
     setTitle("");
     setDescription("");
   };
-  const handleReturn = () => {
+
+  const handleReturn = (): void => {
     router.push("/home");
-  }; 
+  };
 
   return (
     <>
@@ -53,8 +53,8 @@ const PostsPage = () => {
           required
         />
         <button type="submit">Crear Post</button>
-      </form>
-      <button onClick={handleReturn}>Regresar a Home</button>
+        <button type="button" onClick={handleReturn}>Regresar a Home</button>
+      </form>      
     </>
   );
 };
